@@ -1,0 +1,23 @@
+{
+  "name": "@example/minimal",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@types/marked": "^4.0.7",
+    "airtable": "^0.11.5",
+    "astro": "^1.6.0",
+    "dotenv": "^16.0.3",
+    "marked": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.7"
+  }
+}

@@ -1,0 +1,34 @@
+---
+import MainLayout from "../../components/MainLayout.astro";
+import { fetchEpisodes } from "../../lib/Airtable";
+export async function getStaticPaths() {
+  const posts = await fetchEpisodes();
+  const pageData = posts.map((post) => {
+    return {
+      params: {
+        slug: post.slug,
+      },
+      props: {
+        title: post.title,
+        subtitle: post.subtitle,
+        //@ts-ignore
+        body: post.body,
+        image: post.image,
+        date: post.date,
+      },
+    };
+  });
+  console.log(pageData);
+  return pageData;
+}
+const { slug } = Astro.params;
+const { title, subtitle, body, date, image } = Astro.props;
+---
+
+<MainLayout title={title}>
+  <img src={image.url} alt="image" />
+  <h1>{title}</h1>
+  <p>{date}</p>
+  <p>{subtitle}</p>
+  <main set:html={body}></main>
+</MainLayout>
