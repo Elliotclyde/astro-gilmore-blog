@@ -10,6 +10,76 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <style is:global>
+      @font-face {
+        font-family: adamina;
+        src: url("/assets/fonts/Adamina-Regular.ttf");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      html {
+        --font-size-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
+        --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
+        --font-size-md: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
+        --font-size-lg: clamp(1.56rem, 1vw + 1.31rem, 2.11rem);
+        --font-size-xl: clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem);
+        --font-size-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
+        --font-size-xxxl: clamp(3.05rem, 3.54vw + 2.17rem, 5rem);
+        --font-size-huge: clamp(3.81rem, 5.18vw + 2.52rem, 6.66rem);
+
+        --autumn-orange: #cc3f00;
+        --autumn-black: #130600;
+        --autumn-semi-black: #331000;
+        --autumn-dark: #662000;
+        --autumn-white: #f3e6e0;
+      }
+
+      body {
+        color: var(--autumn-black);
+        background-color: var(--autumn-white);
+        font-family: "adamina", Times, serif;
+      }
+      a {
+        color: var(--autumn-dark);
+      }
+      h1.title {
+        font-size: var(--font-size-huge);
+      }
+      h1 {
+        font-size: var(--font-size-xl);
+      }
+      h2 {
+        font-size: var(--font-size-lg);
+      }
+      h3 {
+        font-size: var(--font-size-md);
+      }
+      p {
+        font-size: var(--font-size-base);
+      }
+      main {
+        width: min(90vw, 50rem);
+        margin: 0 auto;
+      }
+
+      main.episode img {
+        width: 100%;
+      }
+
+      main.episode h1,
+      main.episode h2,
+      main.episode h3,
+      main.episode p {
+        margin: var(--font-size-base);
+        line-height: 2;
+      }
+    </style>
   </head>
   <body>
     <Header />

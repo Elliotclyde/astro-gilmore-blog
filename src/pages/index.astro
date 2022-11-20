@@ -5,23 +5,35 @@ import { fetchEpisodes, Episode } from "../lib/Airtable";
 const posts: Array<Episode> = await fetchEpisodes();
 ---
 
-<MainLayout title="Technology of Gilmore Girls">
-  <h1>Technology of Gilmore Girls</h1>
-  <p>A blog about the interaction between Gilmore Girls and technology.</p>
-  <div>
-    {
-      posts
-        .sort((p1, p2) => (p1.date > p2.date ? -1 : p1.date == p2.date ? 0 : 1))
-        .slice(0, 3)
-        .map((p) => (
-          <div>
-            <a href={"/episodes/" + p.slug}>
-              <img src={p.image.thumbnails.large.url} alt="image" />
-              <h3>{p.title}</h3>
-              <p>{p.subtitle}</p>
-            </a>
-          </div>
-        ))
-    }
-  </div>
+<style>
+  main img {
+    width: 100%;
+  }
+</style>
+
+<MainLayout title="Gizmo Girls">
+  <main>
+    <h1 class="title">Gizmo Girls</h1>
+    <p>A blog about the interaction between Gilmore Girls and technology.</p>
+    <h2>Recent posts</h2>
+    <div>
+      {
+        posts
+          .sort((p1, p2) =>
+            p1.date > p2.date ? -1 : p1.date == p2.date ? 0 : 1
+          )
+          .slice(0, 3)
+          .map((p) => (
+            <article>
+              <a href={"/episodes/" + p.slug}>
+                <p>{p.date}</p>
+                <img src={p.image.thumbnails.large.url} alt="image" />
+                <h3>{p.title}</h3>
+                <p>{p.subtitle}</p>
+              </a>
+            </article>
+          ))
+      }
+    </div>
+  </main>
 </MainLayout>
