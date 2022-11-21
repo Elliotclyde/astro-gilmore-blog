@@ -203,8 +203,25 @@ main.home > a {
 .episode-list-item {
   display: flex;
   gap: 2em;
+  justify-content: space-between;
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+.episode-list-item:hover {
+  background-color: var(--autumn-whitish-saturated);
+}
+.episode-list-item > div > * {
+  line-height: 1;
+  align-self: flex-end;
+}
+.episode-list-item > div {
+  display: flex;
+  gap: 2em;
 }
 .episode-list-item > * {
   line-height: 1;
   align-self: flex-end;
+}
+.episode-list-item > :nth-child(3) {
+  justify-self: flex-end;
 }
