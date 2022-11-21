@@ -1,39 +1,39 @@
 ---
 import MainLayout from "../components/MainLayout.astro";
 import { fetchEpisodes, Episode } from "../lib/Airtable";
+import dayjs from "dayjs";
 
 const posts: Array<Episode> = await fetchEpisodes();
 ---
 
-<style>
-  main img {
-    width: 100%;
-  }
-</style>
-
 <MainLayout title="Gizmo Girls">
-  <main>
+  <main class="home">
     <h1 class="title">Gizmo Girls</h1>
-    <p>A blog about the interaction between Gilmore Girls and technology.</p>
-    <h2>Recent posts</h2>
-    <div>
+    <p class="subtitle">
+      A blog about the interaction between Gilmore Girls and technology.
+    </p>
+    <h2>Recent episodes</h2>
+    <div class="home-episode-list">
       {
         posts
           .sort((p1, p2) =>
             p1.date > p2.date ? -1 : p1.date == p2.date ? 0 : 1
           )
-          .slice(0, 3)
+          .slice(0, 30)
           .map((p) => (
             <article>
               <a href={"/episodes/" + p.slug}>
-                <p>{p.date}</p>
+                <div class="info">
+                  <h3>{p.title}</h3>
+                  <p>{p.subtitle}</p>
+                  <p>{dayjs(p.date).format("D MMMM YYYY")}</p>
+                </div>
                 <img src={p.image.thumbnails.large.url} alt="image" />
-                <h3>{p.title}</h3>
-                <p>{p.subtitle}</p>
               </a>
             </article>
           ))
       }
     </div>
+    <a href="/episodes">More episodes</a>
   </main>
 </MainLayout>

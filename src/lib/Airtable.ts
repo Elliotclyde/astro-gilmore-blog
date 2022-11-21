@@ -30,15 +30,17 @@ export async function fetchEpisodes(): Promise<Array<Episode>> {
           function page(records, fetchNextPage) {
             try {
               records.forEach(function (record) {
-                posts.push({
-                  slug: record.get("Slug"),
-                  title: record.get("Title"),
-                  subtitle: record.get("Subtitle"),
-                  //@ts-ignore
-                  body: marked.parse(record.get("Body")),
-                  date: record.get("Date Added"),
-                  image: record.get("Hero Image")[0],
-                });
+                if (record.get("Body")) {
+                  posts.push({
+                    slug: record.get("Slug"),
+                    title: record.get("Title"),
+                    subtitle: record.get("Subtitle"),
+                    //@ts-ignore
+                    body: marked.parse(record.get("Body")),
+                    date: record.get("Date Added"),
+                    image: record.get("Hero Image")[0],
+                  });
+                }
               });
             } catch (e) {
               console.log("error inside eachPage => ", e);

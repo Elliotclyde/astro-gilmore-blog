@@ -6,7 +6,7 @@ const posts: Array<Episode> = await fetchEpisodes();
 ---
 
 <MainLayout title="Gizmo Girls - Episodes">
-  <main>
+  <main class="episodes">
     <h1>Episodes</h1>
     <div>
       {
@@ -16,10 +16,10 @@ const posts: Array<Episode> = await fetchEpisodes();
           )
           .map((p) => (
             <div>
-              <a href={"/episodes/" + p.slug}>
+              <a href={"/episodes/" + p.slug} class="episode-list-item">
                 <img src={p.image.thumbnails.small.url} alt="image" />
                 <h3>{p.title}</h3>
-                <p>{p.subtitle}</p>
+                <p>{p.date}</p>
               </a>
             </div>
           ))

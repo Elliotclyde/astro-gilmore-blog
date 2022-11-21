@@ -3,7 +3,7 @@ import MainLayout from "../../components/MainLayout.astro";
 import { fetchEpisodes } from "../../lib/Airtable";
 export async function getStaticPaths() {
   const posts = await fetchEpisodes();
-  const pageData = posts.map((post) => {
+  const pageData = posts.map((post, index) => {
     return {
       params: {
         slug: post.slug,
@@ -15,13 +15,15 @@ export async function getStaticPaths() {
         body: post.body,
         image: post.image,
         date: post.date,
+        index: index,
+        posts: posts,
       },
     };
   });
   return pageData;
 }
 const { slug } = Astro.params;
-const { title, subtitle, body, date, image } = Astro.props;
+const { title, subtitle, body, date, image, index, posts } = Astro.props;
 ---
 
 <MainLayout title={title}>
@@ -33,5 +35,21 @@ const { title, subtitle, body, date, image } = Astro.props;
       <p>{subtitle}</p>
       <div set:html={body}></div>
     </article>
+    <div class="flex justify-content-between">
+      {
+        posts[index - 1] ? (
+          <a href={"/episodes/" + posts[index - 1].slug}>Previous episode</a>
+        ) : (
+          <div />
+        )
+      }
+      {
+        posts[index + 1] ? (
+          <a href={"/episodes/" + posts[index + 1].slug}>Next episode</a>
+        ) : (
+          <div />
+        )
+      }
+    </div>
   </main>
 </MainLayout>
