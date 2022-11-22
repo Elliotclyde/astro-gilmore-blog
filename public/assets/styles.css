@@ -41,7 +41,7 @@ body {
 }
 main {
   font-size: var(--font-size-base);
-  margin: 0 auto;
+  margin: 0 auto 6em auto;
   width: min(90vw, 50rem);
 }
 a {
@@ -68,6 +68,17 @@ p {
 
 main.episode img {
   width: 100%;
+  aspect-ratio: 14/9;
+  object-fit: cover;
+  margin-bottom: 2em;
+}
+main.episode h1 {
+  margin-bottom: 0;
+  line-height: 1;
+}
+main.episode .subtitle {
+  font-style: italic;
+  opacity: 70%;
 }
 
 h1,
@@ -152,6 +163,8 @@ main.home .info * {
 }
 main.home .info :nth-child(2) {
   font-style: italic;
+  /* font-size: var(--font-size-sm); */
+  opacity: 60%;
 }
 @media (max-width: 700px) {
   main.home article > a {
@@ -204,8 +217,6 @@ main.home > a {
   display: flex;
   gap: 2em;
   justify-content: space-between;
-  padding: 0.5em;
-  border-radius: 0.5em;
 }
 .episode-list-item:hover {
   background-color: var(--autumn-whitish-saturated);

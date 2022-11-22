@@ -9,6 +9,8 @@ export type Episode = {
   body: string;
   date: Date;
   image: any;
+  episodeNumber: number;
+  seasonNumber: number;
 };
 
 export async function fetchEpisodes(): Promise<Array<Episode>> {
@@ -39,6 +41,8 @@ export async function fetchEpisodes(): Promise<Array<Episode>> {
                     body: marked.parse(record.get("Body")),
                     date: record.get("Date Added"),
                     image: record.get("Hero Image")[0],
+                    episodeNumber: record.get("Episode"),
+                    seasonNumber: record.get("Season"),
                   });
                 }
               });
