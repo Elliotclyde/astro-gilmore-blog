@@ -3,20 +3,24 @@
 
 <style>
   nav {
-    padding: 1em 0 1em 0;
+    padding: 1rem 0 1rem 0;
     margin-bottom: 1em;
     background-color: var(--autumn-darkish);
   }
   ul {
     width: min(90vw, 50rem);
     margin: 0 auto;
+  }
+  ul > div {
     display: flex;
     justify-content: space-between;
+    margin: 0 -2rem;
   }
   li {
     list-style-type: none;
   }
   a {
+    padding: 1rem 2em 1rem 2em;
     font-size: var(--font-size-md);
     text-decoration: none;
     color: var(--autumn-whitish-saturated);
@@ -24,18 +28,31 @@
   a:hover,
   a:focus {
     color: var(--autumn-white);
+    background-color: var(--autumn-dark);
+  }
+  @media (max-width: 50rem) {
+    ul > div {
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
+    }
+    a {
+      padding: 1rem 0;
+    }
   }
 </style>
 <nav>
   <ul>
-    <li>
-      <a href="/">Home</a>
-    </li>
-    <li>
-      <a href="/episodes">Episodes</a>
-    </li>
-    <li>
-      <a href="/about">About</a>
-    </li>
+    <div>
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="/episodes">Episodes</a>
+      </li>
+      <li>
+        <a href="/about">About</a>
+      </li>
+    </div>
   </ul>
 </nav>

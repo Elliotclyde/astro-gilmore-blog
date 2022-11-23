@@ -217,6 +217,8 @@ main.home > a {
   display: flex;
   gap: 2em;
   justify-content: space-between;
+  padding: 0 2em;
+  margin: 0 -2em 0 -2em;
 }
 .episode-list-item:hover {
   background-color: var(--autumn-whitish-saturated);
@@ -235,4 +237,16 @@ main.home > a {
 }
 .episode-list-item > :nth-child(3) {
   justify-self: flex-end;
+}
+
+main.episodes .season > h3 {
+  margin: 0;
+}
+main.episodes .season {
+  margin-bottom: 2em;
+}
+
+main.episode .content::first-letter {
+  font-size: var(--font-size-xl);
+  padding-top: 20px;
 }

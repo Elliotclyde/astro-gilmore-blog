@@ -35,7 +35,7 @@ const { title, subtitle, body, date, image, index, posts } = Astro.props;
       <h1>{title}</h1>
       <p class="subtitle">{subtitle}</p>
       <p>{dayjs(date).format("D MMMM YYYY")}</p>
-      <div set:html={body}></div>
+      <div class="content" set:html={body}></div>
     </article>
     <div class="flex justify-content-between">
       {
