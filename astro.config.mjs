@@ -19,7 +19,7 @@ function addImagesToAssetsOnBuild() {
                   const arrayBuffer = await blob.arrayBuffer();
                   const buffer = Buffer.from(arrayBuffer);
                   await fs.writeFile(
-                    `./dist/assets/images/episodes/episode${index}.jpg`,
+                    `dist/assets/images/episodes/episode${index}.jpg`,
                     buffer
                   );
                   resolve(true);
@@ -39,7 +39,7 @@ function addImagesToAssetsOnBuild() {
                   const arrayBuffer = await blob.arrayBuffer();
                   const buffer = Buffer.from(arrayBuffer);
                   await fs.writeFile(
-                    `./dist/assets/images/episodes/episode${index}medium.jpg`,
+                    `dist/assets/images/episodes/episode${index}medium.jpg`,
                     buffer
                   );
                   resolve(true);
@@ -59,7 +59,7 @@ function addImagesToAssetsOnBuild() {
                   const arrayBuffer = await blob.arrayBuffer();
                   const buffer = Buffer.from(arrayBuffer);
                   await fs.writeFile(
-                    `./dist/assets/images/episodes/episode${index}small.jpg`,
+                    `dist/assets/images/episodes/episode${index}small.jpg`,
                     buffer
                   );
                   resolve(true);
