@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -77,10 +77,11 @@ jobs:
     name: Deploy
     steps:
       - name: Deploy to azure container
-      - uses: azure/login@v1
+        uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - uses: azure/CLI@v1
+      - name: Deploy to azure container
+        uses: azure/CLI@v1
         with:
           inlineScript: |
               az storage blob upload-batch --overwrite --account-name gizmogirls --auth-mode key -d '$web' -s ./molecular-metal/dist
