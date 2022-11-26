@@ -61,19 +61,6 @@ jobs:
           ${{ steps.detect-package-manager.outputs.runner }} astro build \
             --site "https://gizmogirls.z8.web.core.windows.net"
         working-directory: ${{ env.BUILD_PATH }}
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ${{ env.BUILD_PATH }}/dist
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy
-    steps:
       - name: Deploy to azure container
         uses: azure/login@v1
         with:
@@ -82,12 +69,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-              az storage blob upload-batch --overwrite --account-name gizmogirls --auth-mode key -d '$web' -s ".dist"
-      - name: Purge CDN endpoint
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-             az cdn endpoint purge --content-paths  "/*" --profile-name "hugh" --name "gizmogirls" --resource-group "DefaultResourceGroup-SEAU"
+              az storage blob upload-batch --overwrite --account-name gizmogirls --auth-mode key -d '$web' -s ./dist
   # Azure logout
       - name: logout
         run: |
