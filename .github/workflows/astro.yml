@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  BUILD_PATH: "./molecular-metal" # default value when not using subfolders
+  BUILD_PATH: "." # default value when not using subfolders
   # BUILD_PATH: subfolder
 
 jobs:
@@ -84,7 +84,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-              az storage blob upload-batch --overwrite --account-name gizmogirls --auth-mode key -d '$web' -s ./molecular-metal/dist
+              az storage blob upload-batch --overwrite --account-name gizmogirls --auth-mode key -d '$web' -s ".dist"
       - name: Purge CDN endpoint
         uses: azure/CLI@v1
         with:
