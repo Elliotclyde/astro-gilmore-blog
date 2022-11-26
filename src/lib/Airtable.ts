@@ -11,6 +11,7 @@ export type Episode = {
   image: any;
   episodeNumber: number;
   seasonNumber: number;
+  index: number;
 };
 
 export async function fetchEpisodes(): Promise<Array<Episode>> {
@@ -32,18 +33,21 @@ export async function fetchEpisodes(): Promise<Array<Episode>> {
           function page(records, fetchNextPage) {
             try {
               records.forEach(function (record) {
-                if (record.get("Body")) {
-                  posts.push({
-                    slug: record.get("Slug"),
-                    title: record.get("Title"),
-                    subtitle: record.get("Subtitle"),
-                    //@ts-ignore
-                    body: marked.parse(record.get("Body")),
-                    date: record.get("Date Added"),
-                    image: record.get("Hero Image")[0],
-                    episodeNumber: record.get("Episode"),
-                    seasonNumber: record.get("Season"),
-                  });
+                if (record.get("Is draft") != "True") {
+                  if (record.get("Body")) {
+                    posts.push({
+                      slug: record.get("Slug"),
+                      title: record.get("Title"),
+                      subtitle: record.get("Subtitle"),
+                      //@ts-ignore
+                      body: marked.parse(record.get("Body")),
+                      date: record.get("Date Added"),
+                      image: record.get("Hero Image")[0],
+                      episodeNumber: record.get("Episode"),
+                      seasonNumber: record.get("Season"),
+                      index: posts.length,
+                    });
+                  }
                 }
               });
             } catch (e) {

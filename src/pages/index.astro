@@ -1,6 +1,7 @@
 ---
 import MainLayout from "../components/MainLayout.astro";
 import { fetchEpisodes, Episode } from "../lib/Airtable";
+import { getImageUrlForEpisode } from "../lib/helpers";
 import dayjs from "dayjs";
 
 const posts: Array<Episode> = await fetchEpisodes();
@@ -28,7 +29,7 @@ const posts: Array<Episode> = await fetchEpisodes();
                   <p>{p.subtitle}</p>
                   <p>{dayjs(p.date).format("D MMMM YYYY")}</p>
                 </div>
-                <img src={p.image.thumbnails.large.url} alt="image" />
+                <img src={getImageUrlForEpisode(p, "medium")} alt="image" />
               </a>
             </article>
           ))
