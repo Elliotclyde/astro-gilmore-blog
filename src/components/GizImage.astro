@@ -1,0 +1,48 @@
+---
+import { Episode } from "../lib/Airtable";
+
+export function getImageUrlForEpisode(
+  episode: Episode,
+  size: string,
+  format: string
+) {
+  const image = episode.image;
+  if (import.meta.env.MODE === "development") {
+    switch (size) {
+      case "large":
+        return image.url;
+      case "medium":
+        return image.thumbnails.large.url;
+      case "small":
+        return image.thumbnails.small.url;
+    }
+    return episode.image.url;
+  }
+  if (import.meta.env.MODE === "production") {
+    switch (size) {
+      case "large":
+        return `/assets/images/episodes/episode${episode.index}.${format}`;
+      case "medium":
+        return `/assets/images/episodes/episode${episode.index}medium.${format}`;
+      case "small":
+        return `/assets/images/episodes/episode${episode.index}small.${format}`;
+    }
+  }
+  throw new Error("Use either production or development for vite mode");
+}
+
+const { size, altText, post } = Astro.props;
+---
+
+<picture>
+  {
+    import.meta.env.MODE === "production" ? (
+      <source
+        srcset={getImageUrlForEpisode(post, size, "webp")}
+        type="image/webp"
+      />
+    ) : null
+  }
+  <source srcset={getImageUrlForEpisode(post, size, "jpg")} type="image/jpg" />
+  <img src={getImageUrlForEpisode(post, size, "jpg")} alt={altText} />
+</picture>

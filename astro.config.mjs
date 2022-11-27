@@ -1,6 +1,9 @@
 import { defineConfig } from "astro/config";
 import { fetchEpisodes } from "./src/lib/Airtable";
 import { promises as fs } from "fs";
+import * as webp from "webp-converter";
+
+webp.grant_permission();
 
 function addImagesToAssetsOnBuild() {
   return {
@@ -22,6 +25,10 @@ function addImagesToAssetsOnBuild() {
                     `dist/assets/images/episodes/episode${index}.jpg`,
                     buffer
                   );
+                  await webp.cwebp(
+                    `dist/assets/images/episodes/episode${index}.jpg`,
+                    `dist/assets/images/episodes/episode${index}.webp`
+                  );
                   resolve(true);
                 }
               } catch (e) {
@@ -42,6 +49,10 @@ function addImagesToAssetsOnBuild() {
                     `dist/assets/images/episodes/episode${index}medium.jpg`,
                     buffer
                   );
+                  await webp.cwebp(
+                    `dist/assets/images/episodes/episode${index}medium.jpg`,
+                    `dist/assets/images/episodes/episode${index}medium.webp`
+                  );
                   resolve(true);
                 }
               } catch (e) {
@@ -61,6 +72,10 @@ function addImagesToAssetsOnBuild() {
                   await fs.writeFile(
                     `dist/assets/images/episodes/episode${index}small.jpg`,
                     buffer
+                  );
+                  await webp.cwebp(
+                    `dist/assets/images/episodes/episode${index}small.jpg`,
+                    `dist/assets/images/episodes/episode${index}small.webp`
                   );
                   resolve(true);
                 }

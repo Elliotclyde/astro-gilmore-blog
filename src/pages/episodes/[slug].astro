@@ -1,8 +1,8 @@
 ---
 import MainLayout from "../../components/MainLayout.astro";
 import { fetchEpisodes } from "../../lib/Airtable";
-import { getImageUrlForEpisode } from "../../lib/helpers";
 import dayjs from "dayjs";
+import GizImage from "../../components/GizImage.astro";
 
 export async function getStaticPaths() {
   const posts = await fetchEpisodes();
@@ -20,22 +20,27 @@ export async function getStaticPaths() {
         date: post.date,
         index: index,
         posts: posts,
+        imageAlt: post.imageAlt,
       },
     };
   });
   return pageData;
 }
 const { slug } = Astro.params;
-const { title, subtitle, body, date, image, index, posts } = Astro.props;
+const { title, subtitle, body, date, image, index, posts, imageAlt } =
+  Astro.props;
 ---
 
-<MainLayout title={title}>
+<MainLayout
+  title={title}
+  description={`Gizmo Girls blog entry for Gilmore Girls season ${posts[index].seasonNumber} episode ${posts[index].episodeNumber}`}
+>
   <main class="episode">
     <article>
       <h1>{title}</h1>
       <p class="subtitle">{subtitle}</p>
       <p>{dayjs(date).format("D MMMM YYYY")}</p>
-      <img src={getImageUrlForEpisode(posts[index], "large")} alt="image" />
+      <GizImage post={posts[index]} size="large" altText={imageAlt} />
 
       <div class="content" set:html={body}></div>
     </article>

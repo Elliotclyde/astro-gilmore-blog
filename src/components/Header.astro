@@ -7,11 +7,11 @@
     margin-bottom: 1em;
     background-color: var(--autumn-darkish);
   }
-  ul {
+  nav > div {
     width: min(90vw, 50rem);
     margin: 0 auto;
   }
-  ul > div {
+  ul {
     display: flex;
     justify-content: space-between;
     margin: 0 -2rem;
@@ -31,7 +31,7 @@
     background-color: var(--autumn-dark);
   }
   @media (max-width: 50rem) {
-    ul > div {
+    ul {
       display: flex;
       justify-content: space-between;
       margin: 0;
@@ -42,8 +42,8 @@
   }
 </style>
 <nav>
-  <ul>
-    <div>
+  <div>
+    <ul>
       <li>
         <a href="/">Home</a>
       </li>
@@ -53,6 +53,6 @@
       <li>
         <a href="/about">About</a>
       </li>
-    </div>
-  </ul>
+    </ul>
+  </div>
 </nav>

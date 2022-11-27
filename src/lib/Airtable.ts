@@ -9,6 +9,7 @@ export type Episode = {
   body: string;
   date: Date;
   image: any;
+  imageAlt: string;
   episodeNumber: number;
   seasonNumber: number;
   index: number;
@@ -46,6 +47,7 @@ export async function fetchEpisodes(): Promise<Array<Episode>> {
                       episodeNumber: record.get("Episode"),
                       seasonNumber: record.get("Season"),
                       index: posts.length,
+                      imageAlt: record.get("Image alt"),
                     });
                   }
                 }

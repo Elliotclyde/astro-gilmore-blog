@@ -1,13 +1,16 @@
 ---
 import MainLayout from "../components/MainLayout.astro";
 import { fetchEpisodes, Episode } from "../lib/Airtable";
-import { getImageUrlForEpisode } from "../lib/helpers";
 import dayjs from "dayjs";
+import GizImage from "../components/GizImage.astro";
 
 const posts: Array<Episode> = await fetchEpisodes();
 ---
 
-<MainLayout title="Gizmo Girls">
+<MainLayout
+  title="Gizmo Girls"
+  description="Gizmo Girls: A blog about the interaction between Gilmore Girls and technology."
+>
   <main class="home">
     <h1 class="title">Gizmo Girls</h1>
     <p class="subtitle">
@@ -29,7 +32,7 @@ const posts: Array<Episode> = await fetchEpisodes();
                   <p>{p.subtitle}</p>
                   <p>{dayjs(p.date).format("D MMMM YYYY")}</p>
                 </div>
-                <img src={getImageUrlForEpisode(p, "medium")} alt="image" />
+                <GizImage post={p} size="large" altText={p.imageAlt} />
               </a>
             </article>
           ))

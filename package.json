@@ -17,7 +17,8 @@
     "astro": "^1.6.0",
     "dayjs": "^1.11.6",
     "dotenv": "^16.0.3",
-    "marked": "^4.1.1"
+    "marked": "^4.1.1",
+    "webp-converter": "^2.3.3"
   },
   "devDependencies": {
     "@types/node": "^18.11.7"

@@ -1,14 +1,17 @@
 ---
 import MainLayout from "../../components/MainLayout.astro";
 import { fetchEpisodes, Episode } from "../../lib/Airtable";
-import { getImageUrlForEpisode } from "../../lib/helpers";
 import dayjs from "dayjs";
+import GizImage from "../../components/GizImage.astro";
 
 const posts: Array<Episode> = await fetchEpisodes();
 const seasons = [1, 2, 3, 4, 5, 6, 7];
 ---
 
-<MainLayout title="Gizmo Girls - Episodes">
+<MainLayout
+  title="Gizmo Girls - Episodes"
+  description="Episodes page for Gizmo Girls: A blog about the interaction between Gilmore Girls and technology."
+>
   <main class="episodes">
     <h1>Episodes</h1>
 
@@ -25,9 +28,10 @@ const seasons = [1, 2, 3, 4, 5, 6, 7];
                     <div>
                       <a href={"/episodes/" + p.slug} class="episode-list-item">
                         <div>
-                          <img
-                            src={getImageUrlForEpisode(p, "small")}
-                            alt="image"
+                          <GizImage
+                            post={p}
+                            size="small"
+                            altText={p.imageAlt}
                           />
                           <h3>{p.title}</h3>
                         </div>

@@ -136,9 +136,15 @@ main.home article > a:before {
   opacity: 0.05;
   border-radius: 2em;
   background-image: url("/assets/images/leaves5.jpg");
+
   background-repeat: no-repeat;
   background-position: 50% 0;
   background-size: cover;
+}
+@supports (background-image: url("/assets/images/leaves5.webp")) {
+  main.home article > a:before {
+    background-image: url("/assets/images/leaves5.webp");
+  }
 }
 main.home article > a:hover,
 main.home article > a:focus {
