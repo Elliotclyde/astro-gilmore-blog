@@ -92,6 +92,6 @@ function addImagesToAssetsOnBuild() {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "http://localhost:3000",
+  site: "https://www.gizmogirls.tech",
   integrations: [addImagesToAssetsOnBuild()],
 });
