@@ -16,8 +16,16 @@ const posts: Array<Episode> = await fetchEpisodes();
     <p class="subtitle">
       A blog about the interaction between Gilmore Girls and technology.
     </p>
+    <section id="subscribe-block">
+      <p>
+        Subscribe via <a href="/rss.xml">RSS</a> or <a
+          href="#"
+          id="subscribe-link">Email</a
+        >
+      </p>
+    </section>
     <h2>Recent episodes</h2>
-    <div class="home-episode-list">
+    <section class="home-episode-list">
       {
         posts
           .sort((p1, p2) =>
@@ -37,7 +45,47 @@ const posts: Array<Episode> = await fetchEpisodes();
             </article>
           ))
       }
-    </div>
+    </section>
     <a href="/episodes">More episodes</a>
   </main>
+  <script>
+    const subscribeEndpoint = "/";
+    document.getElementById("subscribe-link").addEventListener("click", () => {
+      if (!document.getElementById("subscribe-modal-wrapper")) {
+        document.getElementById("subscribe-block").insertAdjacentHTML(
+          "beforeend",
+          `<div class="modal-wrapper" id="subscribe-modal-wrapper">
+        <div class="subscribe-modal">
+          <div>
+            <button id="subscribe-modal-close" class="modal-close">⨉</button>
+          </div>
+          <form action="${subscribeEndpoint}" method="post">
+            <h2>Subscribe to Gizmo Girls</h2>
+            <label for="subscribe-email-input">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="subscribe-email-input"
+              required
+            />
+            <input type="submit" value="Subscribe" />
+          </form>
+        </div>
+      </div>`
+        );
+        document
+          .getElementById("subscribe-modal-close")
+          .addEventListener("click", () => {
+            document.getElementById("subscribe-modal-wrapper").outerHTML = "";
+          });
+        document
+          .getElementById("subscribe-modal-wrapper")
+          .addEventListener("click", (e) => {
+            if (e.target.id === "subscribe-modal-wrapper") {
+              document.getElementById("subscribe-modal-wrapper").outerHTML = "";
+            }
+          });
+      }
+    });
+  </script>
 </MainLayout>

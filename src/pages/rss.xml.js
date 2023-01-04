@@ -21,6 +21,7 @@ export const get = () =>
       link: import.meta.env.SITE + "episodes/" + post.slug,
       title: post.title,
       pubDate: post.date,
+      content: post.body,
     })),
     // (optional) inject custom xml
     customData: `<language>en-us</language>`,
