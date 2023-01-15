@@ -49,7 +49,8 @@ const posts: Array<Episode> = await fetchEpisodes();
     <a href="/episodes">More episodes</a>
   </main>
   <script>
-    const subscribeEndpoint = "/";
+    const subscribeEndpoint =
+      "https://gizmosubscription2.azurewebsites.net/api/managesubscription?code=vKCNSJaCBQNmjHvRuDHgAG4R0wGwrweBSl0V6IMhSzgsAzFuSwMyFg==";
     document.getElementById("subscribe-link").addEventListener("click", () => {
       if (!document.getElementById("subscribe-modal-wrapper")) {
         document.getElementById("subscribe-block").insertAdjacentHTML(
@@ -59,8 +60,9 @@ const posts: Array<Episode> = await fetchEpisodes();
           <div>
             <button id="subscribe-modal-close" class="modal-close">⨉</button>
           </div>
-          <form action="${subscribeEndpoint}" method="post">
+          <form action="#" method="post" id="subscribe-form">
             <h2>Subscribe to Gizmo Girls</h2>
+            <p>About one email a month. 😊</p>
             <label for="subscribe-email-input">Email</label>
             <input
               type="email"
@@ -74,6 +76,37 @@ const posts: Array<Episode> = await fetchEpisodes();
       </div>`
         );
         document
+          .getElementById("subscribe-form")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const emailInput = document.getElementById(
+              "subscribe-email-input"
+            ) as HTMLInputElement;
+            const res = await fetch(subscribeEndpoint, {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({
+                email: emailInput.value,
+                action: "subscribe",
+              }),
+            });
+            const text = await res.text();
+            document.getElementById("subscribe-form").outerHTML =
+              (text === "success"
+                ? `<h2>Successfully subscribed!</h2><p>Welcome to the party!</p>`
+                : `<h2>Oops! Error subscribing.</h2><p>Something wrong might have happened there.</p>`) +
+              `<button id="subscribe-modal-close2" class="modal-close">Close</button>`;
+
+            document
+              .getElementById("subscribe-modal-close2")
+              .addEventListener("click", () => {
+                document.getElementById("subscribe-modal-wrapper").outerHTML =
+                  "";
+              });
+          });
+
+        document
           .getElementById("subscribe-modal-close")
           .addEventListener("click", () => {
             document.getElementById("subscribe-modal-wrapper").outerHTML = "";
@@ -81,7 +114,8 @@ const posts: Array<Episode> = await fetchEpisodes();
         document
           .getElementById("subscribe-modal-wrapper")
           .addEventListener("click", (e) => {
-            if (e.target.id === "subscribe-modal-wrapper") {
+            const wrapper = e.target as HTMLElement;
+            if (wrapper.id === "subscribe-modal-wrapper") {
               document.getElementById("subscribe-modal-wrapper").outerHTML = "";
             }
           });
