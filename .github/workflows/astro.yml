@@ -54,12 +54,12 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
-      - name: Create env file 
+      - name: Create env file
         run: echo "AIRTABLE_API_KEY=" ${{ secrets.AIRTABLE_API_KEY }} >> .env
       - name: Build with Astro
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} astro build \
-            --site "https://gizmogirls.z8.web.core.windows.net"
+            --site "https://gizmogirls.tech"
         working-directory: ${{ env.BUILD_PATH }}
       - name: Deploy to azure container
         uses: azure/login@v1
@@ -69,9 +69,9 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-              az storage blob upload-batch --overwrite --account-name gizmogirls --auth-mode key -d '$web' -s ./dist
-  # Azure logout
+            az storage blob upload-batch --overwrite --account-name gizmogirls --auth-mode key -d '$web' -s ./dist
+      # Azure logout
       - name: logout
         run: |
-            az logout
+          az logout
         if: always()
