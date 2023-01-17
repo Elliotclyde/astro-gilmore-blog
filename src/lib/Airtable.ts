@@ -1,7 +1,6 @@
 import Airtable from "airtable";
 import dotenv from "dotenv";
-import { marked } from "marked";
-
+import { micromark } from "micromark";
 export type Episode = {
   slug: string;
   title: string;
@@ -13,6 +12,7 @@ export type Episode = {
   episodeNumber: number;
   seasonNumber: number;
   index: number;
+  markdownBody: string;
 };
 
 export async function fetchEpisodes(): Promise<Array<Episode>> {
@@ -41,7 +41,8 @@ export async function fetchEpisodes(): Promise<Array<Episode>> {
                       title: record.get("Title"),
                       subtitle: record.get("Subtitle"),
                       //@ts-ignore
-                      body: marked.parse(record.get("Body")),
+                      markdownBody: record.get("Body") as string,
+                      body: micromark(record.get("Body") as string),
                       date: record.get("Date Added"),
                       image: record.get("Hero Image")[0],
                       episodeNumber: record.get("Episode"),

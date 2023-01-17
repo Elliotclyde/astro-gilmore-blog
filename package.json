@@ -12,15 +12,18 @@
   },
   "dependencies": {
     "@astrojs/rss": "^1.0.3",
+    "@azure/storage-blob": "^12.12.0",
     "@types/marked": "^4.0.7",
     "airtable": "^0.11.5",
     "astro": "^1.6.0",
     "dayjs": "^1.11.6",
     "dotenv": "^16.0.3",
-    "marked": "^4.1.1",
+    "micromark": "^3.1.0",
+    "nodemailer": "^6.9.0",
     "webp-converter": "^2.3.3"
   },
   "devDependencies": {
-    "@types/node": "^18.11.7"
+    "@types/node": "^18.11.7",
+    "ts-node": "^10.9.1"
   }
 }
