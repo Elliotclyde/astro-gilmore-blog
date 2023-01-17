@@ -59,7 +59,7 @@ jobs:
       - name: Build with Astro
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} astro build \
-            --site "https://gizmogirls.tech"
+            --site "https://www.gizmogirls.tech"
         working-directory: ${{ env.BUILD_PATH }}
       - name: Deploy to azure container
         uses: azure/login@v1
