@@ -213,28 +213,21 @@ main.home > a {
 }
 .episode-list-item {
   display: flex;
-  gap: 2em;
+  align-items: flex-end;
+  text-decoration: none;
   justify-content: space-between;
-  padding: 0 2em;
-  margin: 0 -2em 0 -2em;
+  margin: 0 -1rem;
+  border-radius: 1em;
+}
+.episode-list-item > * {
+  line-height: 0;
+  margin: 2rem 1rem;
+}
+.episode-list-item > h3 {
+  text-decoration: underline;
 }
 .episode-list-item:hover {
   background-color: var(--autumn-whitish-saturated);
-}
-.episode-list-item > div > * {
-  line-height: 1;
-  align-self: flex-end;
-}
-.episode-list-item > div {
-  display: flex;
-  gap: 2em;
-}
-.episode-list-item > * {
-  line-height: 1;
-  align-self: flex-end;
-}
-.episode-list-item > :nth-child(3) {
-  justify-self: flex-end;
 }
 
 main.episodes .season > h3 {
@@ -318,10 +311,16 @@ button.modal-close {
 @media (max-width: 700px) {
   .episode-list-item {
     flex-direction: column;
-    gap: 0;
+    align-items: flex-start;
+    margin: 1.5em 0;
   }
   .episode-list-item * {
-    align-self: flex-start;
+    line-height: 1;
+    margin: 0;
+  }
+  .episode-list-item h3 {
+    line-height: 1;
+    margin: 0 0 0.5em 0;
   }
 
   main.home article > a {

@@ -27,14 +27,7 @@ const seasons = [1, 2, 3, 4, 5, 6, 7];
                   .map((p) => (
                     <div>
                       <a href={"/episodes/" + p.slug} class="episode-list-item">
-                        <div>
-                          <GizImage
-                            post={p}
-                            size="small"
-                            altText={p.imageAlt}
-                          />
-                          <h3>{p.title}</h3>
-                        </div>
+                        <h3>{p.title}</h3>
                         <p>{dayjs(p.date).format("D MMMM YYYY")}</p>
                       </a>
                     </div>
