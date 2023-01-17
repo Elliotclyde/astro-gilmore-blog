@@ -146,14 +146,18 @@ async function main() {
     let info = await transporter.sendMail({
       from: '"Gizmo Girls 🍁" <hugh@gizmogirls.tech>', // sender address
       to: pair[0], // list of receivers
-      subject: "Gizmo Girls : " + article.title, // Subject line
+      subject: article.title, // Subject line
       text: article.markdownBody, // plain text body
       html:
-        `<p>You're gizmo girls update:</p><h1>${article.title}</h1><p><em>Gizmo Girls, Season ${article.seasonNumber}, Episode ${article.episodeNumber}</em></p>
-        <a href="https://gizmogirls.tech/episodes/${article.slug}">Read on the web</a>
+        `<p>Your gizmo girls update:</p><h1>${article.title}</h1><p><em>Gizmo Girls, Season ${article.seasonNumber}, Episode ${article.episodeNumber}</em></p>
+        <a href="https://www.gizmogirls.tech/episodes/${article.slug}">Read on the web</a><br/>
         <img src="${article.image.url}" alt="${article.imageAlt}"/>` +
         article.body +
-        `<a href="https://gizmosubscription2.azurewebsites.net/api/managesubscription?code=vKCNSJaCBQNmjHvRuDHgAG4R0wGwrweBSl0V6IMhSzgsAzFuSwMyFg==&action=unsubscribe&guid=${pair[1]}">Unsubscribe?</a>`, // html body
+        `<p>-Hugh</p>
+        <br/>
+        <a href="https://www.gizmogirls.tech">Gizmo Girls</a>
+        <br/>
+        <a href="https://gizmosubscription2.azurewebsites.net/api/managesubscription?code=vKCNSJaCBQNmjHvRuDHgAG4R0wGwrweBSl0V6IMhSzgsAzFuSwMyFg==&action=unsubscribe&guid=${pair[1]}">Unsubscribe?</a>`, // html body
     });
 
     console.log("Message sent: %s", info.messageId);

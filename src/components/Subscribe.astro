@@ -1,0 +1,100 @@
+---
+---
+
+<section id="subscribe-block">
+  <p>
+    Subscribe via
+    <a href="/rss.xml" class="call-to-action">RSS</a> or
+    <a href="#" id="subscribe-link" class="call-to-action">Email</a>
+  </p>
+</section>
+<script>
+  let isLoading = false;
+  const subscribeEndpoint =
+    "https://gizmosubscription2.azurewebsites.net/api/managesubscription?code=vKCNSJaCBQNmjHvRuDHgAG4R0wGwrweBSl0V6IMhSzgsAzFuSwMyFg==";
+  document.getElementById("subscribe-link").addEventListener("click", () => {
+    if (!document.getElementById("subscribe-modal-wrapper")) {
+      document.getElementById("subscribe-block").insertAdjacentHTML(
+        "beforeend",
+        `<div class="modal-wrapper" id="subscribe-modal-wrapper">
+        <div class="subscribe-modal">
+          <div>
+            <button id="subscribe-modal-close" class="modal-close">⨉</button>
+          </div>
+          <form action="#" method="post" id="subscribe-form">
+            <h2>Subscribe to Gizmo Girls</h2>
+            <p>About one email a month. 😊</p>
+            <label for="subscribe-email-input">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="subscribe-email-input"
+              required
+            />
+            <input  id="subscribe-email-submit" type="submit" value="Subscribe" />
+          </form>
+        </div>
+      </div>`
+      );
+      document
+        .getElementById("subscribe-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          isLoading = true;
+          const emailInput = document.getElementById(
+            "subscribe-email-input"
+          ) as HTMLInputElement;
+          document
+            .querySelectorAll("#subscribe-form input")
+            .forEach((input) => {
+              const i = input as HTMLInputElement;
+              i.disabled = true;
+            });
+          (
+            document.getElementById(
+              "subscribe-email-submit"
+            ) as HTMLInputElement
+          ).value = "Loading . . .";
+          const res = await fetch(subscribeEndpoint, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              email: emailInput.value,
+              action: "subscribe",
+            }),
+          });
+          const text = await res.text();
+          isLoading = false;
+          document.getElementById("subscribe-form").outerHTML =
+            (text === "success"
+              ? `<h2>Successfully subscribed!</h2><p>Welcome to the party!</p>`
+              : `<h2>Oops! Error subscribing.</h2><p>Something wrong might have happened there.</p>`) +
+            `<button id="subscribe-modal-close2" class="modal-close">Close</button>`;
+
+          document
+            .getElementById("subscribe-modal-close2")
+            .addEventListener("click", () => {
+              document.getElementById("subscribe-modal-wrapper").outerHTML = "";
+            });
+        });
+
+      document
+        .getElementById("subscribe-modal-close")
+        .addEventListener("click", () => {
+          if (!isLoading) {
+            document.getElementById("subscribe-modal-wrapper").outerHTML = "";
+          }
+        });
+      document
+        .getElementById("subscribe-modal-wrapper")
+        .addEventListener("click", (e) => {
+          if (!isLoading) {
+            const wrapper = e.target as HTMLElement;
+            if (wrapper.id === "subscribe-modal-wrapper") {
+              document.getElementById("subscribe-modal-wrapper").outerHTML = "";
+            }
+          }
+        });
+    }
+  });
+</script>

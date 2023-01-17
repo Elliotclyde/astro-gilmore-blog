@@ -26,6 +26,7 @@ button {
   -webkit-appearance: none;
   -moz-appearance: none;
   background-color: transparent;
+  font-family: "adamina", Times, serif;
 }
 html {
   --font-size-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
@@ -44,6 +45,7 @@ html {
   --autumn-semi-black: #331000;
   --autumn-darkish: #3f1400;
   --autumn-dark: #662000;
+  --saturated-orange: #ff6e0f;
 
   --autumn-whitish-saturated: #ffd7c6;
   --autumn-white: #f3e6e0;
@@ -83,6 +85,9 @@ h3 {
 p {
   font-size: var(--font-size-base);
 }
+input {
+  font-family: "adamina", Times, serif;
+}
 
 main.episode img {
   width: 100%;
@@ -114,7 +119,7 @@ p {
 
 main.home * {
   margin-bottom: 0;
-  line-height: 1;
+  line-height: 1.5;
 }
 
 h1.title {
@@ -189,7 +194,6 @@ main.home .info * {
 }
 main.home .info :nth-child(2) {
   font-style: italic;
-  /* font-size: var(--font-size-sm); */
   opacity: 60%;
 }
 .flex {
@@ -274,7 +278,7 @@ main.episode .content::first-letter {
 .subscribe-modal input,
 .subscribe-modal label {
   border: none;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
   display: block;
   width: 100%;
 }
@@ -302,14 +306,14 @@ button.modal-close {
   padding: 0.5em 0.5em;
   padding: 0.5em 0;
   margin-bottom: 1em;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
   display: block;
   width: 100%;
 }
 
 .subscribe-modal p {
   margin-bottom: 2em;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
 }
 @media (max-width: 700px) {
   .episode-list-item {
@@ -336,4 +340,28 @@ button.modal-close {
     width: 90%;
     padding: 5%;
   }
+}
+.call-to-action {
+  color: var(--autumn-black);
+  background-color: var(--saturated-orange);
+  padding: 0.5em 1em;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 0.5em;
+  margin: 0.125em;
+}
+.call-to-action:hover,
+.call-to-action:focus {
+  color: black;
+  background: linear-gradient(50deg, var(--saturated-orange), #ff8e43);
+  transform: scale(1.2);
+}
+
+.button:hover:not(:disabled),
+.button:focus:not(:disabled),
+input[type="submit"]:hover:not(:disabled),
+input[type="submit"]:focus:not(:disabled) {
+  color: black;
+  background: linear-gradient(50deg, var(--saturated-orange), #ff8e43);
+  cursor: pointer;
 }
