@@ -25,7 +25,7 @@ const posts: Array<Episode> = await fetchEpisodes();
           .sort((p1, p2) =>
             p1.date > p2.date ? -1 : p1.date == p2.date ? 0 : 1
           )
-          .slice(0, 30)
+          .slice(0, 3)
           .map((p) => (
             <article>
               <a href={"/episodes/" + p.slug}>
