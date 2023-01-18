@@ -149,15 +149,17 @@ async function main() {
       subject: article.title, // Subject line
       text: article.markdownBody, // plain text body
       html:
-        `<p>Your gizmo girls update:</p><h1>${article.title}</h1><p><em>Gizmo Girls, Season ${article.seasonNumber}, Episode ${article.episodeNumber}</em></p>
+        `<table>
+      <td width="350px"><p>Your gizmo girls update:</p><h1>${article.title}</h1><p><em>Gizmo Girls, Season ${article.seasonNumber}, Episode ${article.episodeNumber}</em></p>
         <a href="https://www.gizmogirls.tech/episodes/${article.slug}">Read on the web</a><br/>
-        <img src="${article.image.url}" alt="${article.imageAlt}"/>` +
+        <img style="object-fit: cover;" width="350px" height="225px" src="https://www.gizmogirls.tech/assets/images/episodes/episode${article.index}.jpg" alt="${article.imageAlt}"/>` +
         article.body +
         `<p>-Hugh</p>
         <br/>
         <a href="https://www.gizmogirls.tech">Gizmo Girls</a>
         <br/>
-        <a href="https://gizmosubscription2.azurewebsites.net/api/managesubscription?code=vKCNSJaCBQNmjHvRuDHgAG4R0wGwrweBSl0V6IMhSzgsAzFuSwMyFg==&action=unsubscribe&guid=${pair[1]}">Unsubscribe?</a>`, // html body
+        <a href="https://gizmosubscription2.azurewebsites.net/api/managesubscription?code=vKCNSJaCBQNmjHvRuDHgAG4R0wGwrweBSl0V6IMhSzgsAzFuSwMyFg==&action=unsubscribe&guid=${pair[1]}">Unsubscribe?</a>
+        </td></table>`, // html body
     });
 
     console.log("Message sent: %s", info.messageId);
